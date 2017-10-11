@@ -90,7 +90,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <h2.version>1.4.196</h2.version>
-    <hibernate.version>4.3.11.Final</hibernate.version>
+    <hibernate.version>5.2.11.Final</hibernate.version>
     <hikari.version>2.4.6</hikari.version>
     <jpa.version>2.1.1</jpa.version>
     <junit.version>4.12</junit.version>
