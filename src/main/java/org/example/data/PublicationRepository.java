@@ -16,8 +16,8 @@ public class PublicationRepository
       + "   , PRIMARY KEY (id)"
       + ")";
   private static final String QUERY_INSERT      = "INSERT INTO publication (access_level, title) VALUES (?, ?)";
-  private static final String QUERY_SELECT      = "SELECT * FROM publication WHERE access_level = COALESCE(?, access_level) AND UPPER(TRIM(BOTH ' ' FROM title)) = UPPER(TRIM(BOTH ' ' FROM COALESCE(?, '')))";
-  private static final String QUERY_SELECT_LIKE = "SELECT * FROM publication WHERE access_level = COALESCE(?, access_level) AND UPPER(TRIM(BOTH ' ' FROM title)) LIKE CONCAT('%', UPPER(TRIM(BOTH ' ' FROM COALESCE(?, ''))), '%')";
+  private static final String QUERY_SELECT      = "SELECT * FROM publication WHERE access_level = COALESCE(CAST(? AS VARCHAR), access_level) AND UPPER(TRIM(BOTH ' ' FROM title)) = UPPER(TRIM(BOTH ' ' FROM COALESCE(CAST(? AS VARCHAR), '')))";
+  private static final String QUERY_SELECT_LIKE = "SELECT * FROM publication WHERE access_level = COALESCE(CAST(? AS VARCHAR), access_level) AND UPPER(TRIM(BOTH ' ' FROM title)) LIKE CONCAT('%', UPPER(TRIM(BOTH ' ' FROM COALESCE(CAST(? AS VARCHAR), ''))), '%')";
   private static final String QUERY_UPDATE      = "UPDATE publication SET access_level = ? AND title ? WHERE id = ?";
 
   private static Connection CONNECTION;
