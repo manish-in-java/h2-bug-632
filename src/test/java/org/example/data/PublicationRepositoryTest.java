@@ -4,23 +4,14 @@ import org.example.domain.AccessLevel;
 import org.example.domain.Publication;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 import static org.junit.Assert.assertNotNull;
 
-@ContextConfiguration(locations = "classpath:springContext.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 public class PublicationRepositoryTest
 {
-  @Autowired
-  private PublicationRepository repository;
+  private PublicationRepository repository = new PublicationRepository();
 
   @Before
   public void setup()
@@ -29,7 +20,11 @@ public class PublicationRepositoryTest
     {
       for (final AccessLevel accessLevel : AccessLevel.values())
       {
-        repository.saveAndFlush(new Publication(UUID.randomUUID().toString(), accessLevel));
+        final Publication publication = new Publication();
+        publication.setAccessLevel(accessLevel);
+        publication.setTitle(UUID.randomUUID().toString());
+
+        repository.save(publication);
       }
     }
   }
